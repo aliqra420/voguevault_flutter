@@ -1,0 +1,22 @@
+name: voguevault
+publish_to: 'none'
+description: VogueVault Fashion Shop App - ICT725 Assessment 4
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.1.0
+  # google_fonts removed due to compatibility issues with current SDK
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/dress/
