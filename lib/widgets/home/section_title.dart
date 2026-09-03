@@ -5,10 +5,12 @@ import '../../core/utils/responsive.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
+  final VoidCallback? onShowAll;
 
   const SectionTitle({
     super.key,
     required this.title,
+    this.onShowAll,
   });
 
   @override
@@ -38,12 +40,15 @@ class SectionTitle extends StatelessWidget {
 
           const Spacer(),
 
-          Text(
-            'Show all',
-            style: TextStyle(
-              fontSize: Responsive.font(context, 13.5),
-              fontWeight: FontWeight.w400,
-              color: const Color(0xFF9B9B9F),
+          GestureDetector(
+            onTap: onShowAll,
+            child: Text(
+              'Show all',
+              style: TextStyle(
+                fontSize: Responsive.font(context, 13.5),
+                fontWeight: FontWeight.w400,
+                color: const Color(0xFF9B9B9F),
+              ),
             ),
           ),
         ],

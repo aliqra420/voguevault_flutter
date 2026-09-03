@@ -5,32 +5,38 @@ import '../../core/utils/responsive.dart';
 import '../../core/constants/app_assets.dart';
 
 class CategoryRow extends StatelessWidget {
-  const CategoryRow({super.key});
+  final String selectedCategory;
+  final ValueChanged<String>? onChanged;
+
+  const CategoryRow({super.key, this.selectedCategory = 'Women', this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     final s = Responsive.scale(context);
 
     final categories = [
-      const _CategoryData(
+      _CategoryData(
         icon: Icons.female,
         title: 'Women',
-        selected: true,
+        selected: selectedCategory == 'Women',
       ),
-      const _CategoryData(
+      _CategoryData(
         icon: Icons.male,
         title: 'Men',
         image: AppAssets.menLogo,
+        selected: selectedCategory == 'Men',
       ),
-      const _CategoryData(
+      _CategoryData(
         icon: Icons.remove_red_eye_outlined,
         title: 'Accessories',
         image: AppAssets.accessoriesLogo,
+        selected: selectedCategory == 'Accessories',
       ),
-      const _CategoryData(
+      _CategoryData(
         icon: Icons.spa_outlined,
         title: 'Beauty',
         image: AppAssets.beautyLogo,
+        selected: selectedCategory == 'Beauty',
       ),
     ];
 
@@ -94,35 +100,41 @@ class CategoryRow extends StatelessWidget {
                             ),
                           )
                         : null,
-                    child: item.image != null
-                        ? Padding(
-                            padding: EdgeInsets.all(6 * s),
-                            child: Image.asset(
-                              item.image!,
-                              width: 24 * s,
-                              height: 24 * s,
-                              fit: BoxFit.contain,
+                    child: GestureDetector(
+                      onTap: () => onChanged?.call(item.title),
+                      child: item.image != null
+                          ? Padding(
+                              padding: EdgeInsets.all(6 * s),
+                              child: Image.asset(
+                                item.image!,
+                                width: 24 * s,
+                                height: 24 * s,
+                                fit: BoxFit.contain,
+                              ),
+                            )
+                          : Icon(
+                              item.icon,
+                              size: 24 * s,
+                              color: item.selected ? Colors.white : const Color(0xFFB7B7BB),
                             ),
-                          )
-                        : Icon(
-                            item.icon,
-                            size: 24 * s,
-                            color: item.selected ? Colors.white : const Color(0xFFB7B7BB),
-                          ),
+                    ),
                   ),
                 ),
 
                 SizedBox(height: 7 * s),
 
                 // TITLE
-                Text(
-                  item.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: Responsive.font(context, 10.5),
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF99999F),
+                GestureDetector(
+                  onTap: () => onChanged?.call(item.title),
+                  child: Text(
+                    item.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: Responsive.font(context, 10.5),
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF99999F),
+                    ),
                   ),
                 ),
               ],

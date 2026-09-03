@@ -15,7 +15,7 @@ class AppAssets {
       '$imagePath/product_dress.png';
 
   static const String productSport =
-      '$imagePath/product_sport.png';
+      '$imagePath/product_sport.jpg';
 
   // Party banner
   static const String party =

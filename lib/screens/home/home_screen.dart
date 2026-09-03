@@ -6,8 +6,9 @@ import '../cart/cart_screen.dart';
 import '../profile/profile_screen.dart';
 import '../../widgets/home/category_row.dart';
 import '../../widgets/home/feature_products.dart';
-import '../../widgets/home/hero_banner.dart';
+import '../../widgets/home/men_hero_banner.dart';
 import '../../widgets/home/home_bottom_nav.dart';
+import '../product/show_all_products_screen.dart';
 import '../../widgets/home/home_header.dart';
 import '../../widgets/home/party_banner.dart';
 import '../../widgets/home/recommended_products.dart';
@@ -23,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedBottomIndex = 0;
+  String selectedCategory = 'Women';
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +48,21 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox(height: 18 * s),
             ),
 
-            // WOMEN / MEN / ACCESSORIES / BEAUTY
-            const SliverToBoxAdapter(
-              child: CategoryRow(),
+            // HERO / COLLECTION (mixed across Women, Men, Accessories, and Beauty)
+            SliverToBoxAdapter(
+              child: MenHeroBanner(category: selectedCategory),
             ),
 
             SliverToBoxAdapter(
               child: SizedBox(height: 25 * s),
             ),
 
-            // AUTUMN COLLECTION
-            const SliverToBoxAdapter(
-              child: HeroBanner(),
+            // WOMEN / MEN / ACCESSORIES / BEAUTY
+            SliverToBoxAdapter(
+              child: CategoryRow(
+                selectedCategory: selectedCategory,
+                onChanged: (c) => setState(() => selectedCategory = c),
+              ),
             ),
 
             SliverToBoxAdapter(
@@ -65,39 +70,58 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // FEATURE PRODUCTS TITLE
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SectionTitle(
                 title: 'Feature Products',
+                onShowAll: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ShowAllProductsScreen(
+                      section: 'Feature',
+                      category: selectedCategory,
+                    ),
+                  ),
+                ),
               ),
             ),
 
             // FEATURE PRODUCTS
-            const SliverToBoxAdapter(
-              child: FeatureProducts(),
+            SliverToBoxAdapter(
+              child: FeatureProducts(category: selectedCategory),
             ),
 
             SliverToBoxAdapter(
               child: SizedBox(height: 15 * s),
             ),
 
-            // PARTY BANNER
-            const SliverToBoxAdapter(
-              child: PartyBanner(),
-            ),
-
-            SliverToBoxAdapter(
-              child: SizedBox(height: 43 * s),
-            ),
+            // PARTY BANNER (only for Women category)
+            if (selectedCategory == 'Women') ...[
+              const SliverToBoxAdapter(
+                child: PartyBanner(),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(height: 43 * s),
+              ),
+            ],
 
             // RECOMMENDED
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SectionTitle(
                 title: 'Recommended',
+                onShowAll: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ShowAllProductsScreen(
+                      section: 'Recommended',
+                      category: selectedCategory,
+                    ),
+                  ),
+                ),
               ),
             ),
 
-            const SliverToBoxAdapter(
-              child: RecommendedProducts(),
+            SliverToBoxAdapter(
+              child: RecommendedProducts(category: selectedCategory),
             ),
 
             SliverToBoxAdapter(
@@ -105,14 +129,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // TOP COLLECTION
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SectionTitle(
                 title: 'Top Collection',
+                onShowAll: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ShowAllProductsScreen(
+                      section: 'Top Collection',
+                      category: selectedCategory,
+                    ),
+                  ),
+                ),
               ),
             ),
 
-            const SliverToBoxAdapter(
-              child: TopCollection(),
+            SliverToBoxAdapter(
+              child: TopCollection(category: selectedCategory),
             ),
 
             SliverToBoxAdapter(

@@ -1,130 +1,132 @@
 import 'package:flutter/material.dart';
 // removed google_fonts - using default TextStyle
 
+import 'dart:convert';
+
 import '../../core/constants/app_assets.dart';
 import '../../core/utils/responsive.dart';
+import '../../data/products.dart';
+import '../../models/product.dart';
+import '../../screens/product/product_details_screen.dart';
 
-class RecommendedProducts extends StatelessWidget {
-  const RecommendedProducts({super.key});
+class RecommendedProducts extends StatefulWidget {
+  final String category;
+
+  const RecommendedProducts({super.key, this.category = 'Women'});
+
+  @override
+  State<RecommendedProducts> createState() => _RecommendedProductsState();
+}
+
+class _RecommendedProductsState extends State<RecommendedProducts> {
+  List<String> dynamicImages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAssetsForCategory();
+  }
+
+  @override
+  void didUpdateWidget(covariant RecommendedProducts oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.category != widget.category) {
+      dynamicImages = [];
+      _loadAssetsForCategory();
+    }
+  }
+
+  Future<void> _loadAssetsForCategory() async {
+    try {
+      final manifestContent = await DefaultAssetBundle.of(context).loadString('AssetManifest.json');
+      final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+      final prefix = 'assets/images/${widget.category.toLowerCase()}/';
+      final keys = manifestMap.keys.where((k) => k.startsWith(prefix)).toList();
+      setState(() => dynamicImages = keys);
+    } catch (_) {}
+  }
+
+  String _titleFromFile(String fileName) {
+    final noExt = fileName.split('.').first;
+    final cleaned = noExt.replaceAll(RegExp(r'[_\-]'), ' ');
+    return cleaned.splitMapJoin(RegExp(r"\b\w"), onMatch: (m) => m.group(0)!.toUpperCase(), onNonMatch: (n) => n).trim();
+  }
 
   @override
   Widget build(BuildContext context) {
     final s = Responsive.scale(context);
+    final filtered = widget.category == 'Women'
+        ? products.where((p) => p.category == 'Women' || p.category == 'Dresses').toList()
+        : products.where((p) => p.category == widget.category).toList();
 
-    final products = [
-      _Recommended(
-        image: AppAssets.hoodie,
-        name: 'White fashion hoodie',
-        price: '\$ 29.00',
-      ),
-      _Recommended(
-        image: AppAssets.cotton,
-        name: 'Cotton T-shirt',
-        price: '\$ 30.00',
-      ),
-    ];
+    final items = filtered.isNotEmpty
+        ? (filtered.length > 3
+            ? filtered.skip(1).take(3).toList()
+            : filtered.take(3).toList())
+        : (dynamicImages.isNotEmpty
+            ? dynamicImages.take(3).map((k) {
+                final file = k.split('/').last;
+                return Product(
+                  id: 'dynamic-recommended-${file}',
+                  name: _titleFromFile(file),
+                  price: 29.99,
+                  image: k,
+                  category: widget.category,
+                );
+              }).toList()
+            : [
+                const Product(
+                  id: 'recommended-fallback',
+                  name: 'Fallback Hoodie',
+                  price: 29.00,
+                  image: AppAssets.hoodie,
+                  category: 'Women',
+                )
+              ]);
 
     return SizedBox(
-      height: 76 * s,
+      height: 270 * s,
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(
-          horizontal: 37 * s,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 39 * s),
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: products.length,
-        separatorBuilder: (_, __) {
-          return SizedBox(width: 17 * s);
-        },
+        itemCount: items.length,
+        separatorBuilder: (_, __) => SizedBox(width: 23 * s),
         itemBuilder: (context, index) {
-          final product = products[index];
-
-          return Container(
-            width: 245 * s,
-            height: 76 * s,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(9 * s),
-              border: Border.all(
-                color: const Color(0xFFF0F0F2),
-              ),
+          final product = items[index];
+          final cardWidth = 145 * s;
+          return GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ProductDetailsScreen(product: product)),
             ),
-            child: Row(
-              children: [
-
-                // IMAGE
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(9 * s),
-                    bottomLeft: Radius.circular(9 * s),
-                  ),
-                  child: SizedBox(
-                    width: 76 * s,
-                    height: 76 * s,
-                    child: Image.asset(
-                      product.image,
-                      fit: BoxFit.cover,
+            child: SizedBox(
+              width: cardWidth,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(11 * s),
+                    child: SizedBox(
+                      width: cardWidth,
+                      height: 197 * s,
+                      child: Image.asset(product.image, fit: BoxFit.cover),
                     ),
                   ),
-                ),
 
-                SizedBox(width: 11 * s),
+                  SizedBox(height: 12 * s),
 
-                // TEXT
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      right: 8 * s,
-                    ),
-                    child: Column(
-                      mainAxisAlignment:
-                          MainAxisAlignment.center,
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                      children: [
+                  Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: Responsive.font(context, 12.5), fontWeight: FontWeight.w400, color: const Color(0xFF222229))),
 
-                        Text(
-                          product.name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: Responsive.font(context, 12.5),
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF282830),
-                          ),
-                        ),
+                  SizedBox(height: 4 * s),
 
-                        SizedBox(height: 3 * s),
-
-                        Text(
-                          product.price,
-                          style: TextStyle(
-                            fontSize: Responsive.font(context, 16),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                  Text('\$ ${product.price.toStringAsFixed(2)}', style: TextStyle(fontSize: Responsive.font(context, 17), fontWeight: FontWeight.w600, color: const Color(0xFF15151A))),
+                ],
+              ),
             ),
           );
         },
       ),
     );
   }
-}
-
-class _Recommended {
-  final String image;
-  final String name;
-  final String price;
-
-  const _Recommended({
-    required this.image,
-    required this.name,
-    required this.price,
-  });
 }

@@ -53,9 +53,9 @@ class _ProductDetailsState extends State<ProductDetailsScreen> {
                       borderRadius: BorderRadius.circular(18),
                       child: Container(
                         color: AppColors.soft,
-                        height: 360,
+                        height: 420,
                         width: double.infinity,
-                        child: Image.asset(widget.product.image, fit: BoxFit.cover),
+                        child: Image.asset(widget.product.image, fit: BoxFit.contain),
                       ),
                     ),
                     const SizedBox(height: 20),

@@ -13,6 +13,8 @@ dependencies:
   # google_fonts removed due to compatibility issues with current SDK
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   flutter_lints: ^2.0.0
 
 flutter:
@@ -20,3 +22,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/dress/
+    - assets/images/men/
+    - assets/images/accessories/
+    - assets/images/beauty/
+    - assets/images/women/

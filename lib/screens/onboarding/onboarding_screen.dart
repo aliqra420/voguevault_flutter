@@ -15,17 +15,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       'title': 'Choose Products',
       'subtitle': 'Find your favourite fashion pieces and build your own look.',
-      'image': 'assets/images/hero_autumn.png',
+      'image': 'assets/images/onboarding1.png',
     },
     {
       'title': 'Make Payment',
       'subtitle': 'Simple and secure checkout for a smooth shopping experience.',
-      'image': 'assets/images/cotton.png',
+      'image': 'assets/images/onboarding2.png',
     },
     {
       'title': 'Get Your Order',
       'subtitle': 'Track your purchase and receive your order with confidence.',
-      'image': 'assets/images/elegant.png',
+      'image': 'assets/images/onboarding3.png',
     },
   ];
 
@@ -58,13 +58,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        p['image']!,
-                        height: 300,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height * 0.42,
+                        maxWidth: MediaQuery.of(context).size.width,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.asset(
+                          p['image']!,
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 38),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/constants/app_assets.dart';
 import '../../widgets/bottom_nav.dart';
+import '../auth/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,7 +19,13 @@ class ProfileScreen extends StatelessWidget {
         trailing: const Icon(Icons.edit_outlined)),
       const SizedBox(height: 12),
       Expanded(child: ListView(children: [
-    _item(Icons.location_on_outlined, 'Shipping Address'), _item(Icons.credit_card_outlined, 'Payment Method'), _item(Icons.shopping_bag_outlined, 'My Orders'), _item(Icons.favorite_border, 'My Wishlist'), _item(Icons.notifications_none, 'My Notifications'), _item(Icons.settings_outlined, 'Settings'), _item(Icons.help_outline, 'Help & Support'), _item(Icons.logout, 'Log Out'),
+    _item(Icons.location_on_outlined, 'Shipping Address'), _item(Icons.credit_card_outlined, 'Payment Method'), _item(Icons.shopping_bag_outlined, 'My Orders'), _item(Icons.favorite_border, 'My Wishlist'), _item(Icons.notifications_none, 'My Notifications'), _item(Icons.settings_outlined, 'Settings'), _item(Icons.help_outline, 'Help & Support'), _item(Icons.logout, 'Log Out', onTap: () {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        (route) => false,
+      );
+    }),
   ]))])), bottomNavigationBar: const BottomNav(index: 3));
-  static Widget _item(IconData icon, String title) => ListTile(contentPadding: const EdgeInsets.symmetric(horizontal: 24), leading: Icon(icon, size: 20, color: AppColors.muted), title: Text(title, style: const TextStyle(fontSize: 13)), trailing: const Icon(Icons.chevron_right, size: 18));
+  static Widget _item(IconData icon, String title, {VoidCallback? onTap}) => ListTile(contentPadding: const EdgeInsets.symmetric(horizontal: 24), onTap: onTap, leading: Icon(icon, size: 20, color: AppColors.muted), title: Text(title, style: const TextStyle(fontSize: 13)), trailing: const Icon(Icons.chevron_right, size: 18));
 }

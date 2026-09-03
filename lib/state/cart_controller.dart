@@ -30,7 +30,7 @@ class CartController extends ChangeNotifier {
   }
 
   double get subtotal => items.fold(0, (sum, item) => sum + item.total);
-  double get shipping => items.isEmpty ? 0 : 10;
+  double get shipping => 0;
   double get total => subtotal + shipping;
   int get count => items.fold(0, (sum, item) => sum + item.quantity);
   void clear() {

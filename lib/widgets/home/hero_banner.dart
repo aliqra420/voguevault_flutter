@@ -49,7 +49,7 @@ class HeroBanner extends StatelessWidget {
                 right: 20 * s,
                 top: 24 * s,
                 child: Text(
-                  'Autumn\nCollection\n2021',
+                  'Autumn\nCollection\n2026',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: Responsive.font(context, 24),

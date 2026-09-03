@@ -1,7 +1,7 @@
 import '../models/product.dart';
 
 const products = <Product>[
-  Product(id: 'p1', name: 'Sportwear Set', price: 80, image: 'assets/images/product_sport.png', category: 'Women', rating: 5, reviews: 83),
+  Product(id: 'p1', name: 'Sportwear Set', price: 80, image: 'assets/images/product_sport.jpg', category: 'Women', rating: 5, reviews: 83),
   Product(id: 'p2', name: 'Linen Dress', price: 52, image: 'assets/images/dress/linen_dress.png', category: 'Dresses', reviews: 64),
   Product(id: 'p3', name: 'Fitted Waist Dress', price: 47.99, image: 'assets/images/dress/fitted_waist_dress.png', category: 'Dresses', reviews: 53),
   Product(id: 'p4', name: 'Maxi Dress', price: 68, image: 'assets/images/dress/maxi_dress.png', category: 'Dresses', reviews: 46),
@@ -10,4 +10,37 @@ const products = <Product>[
   Product(id: 'p7', name: 'Tie Back Mini Dress', price: 67, image: 'assets/images/dress/tie_back_mini_dress.png', category: 'Dresses', reviews: 39),
   Product(id: 'p8', name: 'Leaves Green Dress', price: 64, image: 'assets/images/dress/leaves_green_dress.png', category: 'Dresses', reviews: 83),
   Product(id: 'p9', name: 'Off Shoulder Dress', price: 78.99, image: 'assets/images/dress/off_shoulder_dress.png', category: 'Dresses', reviews: 25),
+  // Men (added from assets/images/men)
+  Product(id: 'p10', name: 'Mens Denim Jeans Apex Dark', price: 69.99, image: 'assets/images/men/Mens_Denim_Jeans_Apex[Dark].jpg', category: 'Men'),
+  Product(id: 'p11', name: 'Mens Premium Blank Full Sleeve T Shirt Charcoal', price: 49.99, image: 'assets/images/men/Mens_Premium_Blank_Full_Sleeve_T_Shirt_Charcoal.jpg', category: 'Men'),
+  Product(id: 'p12', name: 'Mens Premium Blank T shirt', price: 39.99, image: 'assets/images/men/Mens_Premium_Blank_T_shirt.jpg', category: 'Men'),
+  Product(id: 'p13', name: 'Mens Premium Chino Pant', price: 59.99, image: 'assets/images/men/Mens_Premium_Chino_Pant.jpg', category: 'Men'),
+  Product(id: 'p14', name: 'Mens Premium Contemporary T Shirt Brick Grey', price: 44.99, image: 'assets/images/men/Mens_Premium_Contemporary_T_Shirt_Brick_Grey.jpg', category: 'Men'),
+  Product(id: 'p15', name: 'Mens Premium Formal Pant', price: 64.99, image: 'assets/images/men/Mens_Premium_Formal_Pant.jpg', category: 'Men'),
+  Product(id: 'p16', name: 'Mens Premium Limited Edition Polo', price: 74.99, image: 'assets/images/men/Mens_Premium_Limited_Edition_Polo.jpg', category: 'Men'),
+  Product(id: 'p17', name: 'Mens Premium Luxe Polo', price: 69.99, image: 'assets/images/men/Mens_Premium_Luxe_Polo.jpg', category: 'Men'),
+  Product(id: 'p18', name: 'Mens Premium Panjabi Darshan', price: 59.99, image: 'assets/images/men/Mens_Premium_Panjabi_Darshan.jpg', category: 'Men'),
+  // Accessories (added from assets/images/accessories)
+  Product(id: 'p19', name: 'Aunt Pearl Necklace', price: 19.99, image: 'assets/images/accessories/Aunt_Pearl_Necklace.webp', category: 'Accessories'),
+  Product(id: 'p20', name: 'Calista Necklace Set', price: 24.99, image: 'assets/images/accessories/Calista_Necklace_Set.webp', category: 'Accessories'),
+  Product(id: 'p21', name: 'Demi Necklace', price: 14.99, image: 'assets/images/accessories/Demi_Necklace.webp', category: 'Accessories'),
+  Product(id: 'p22', name: 'Emily Necklace', price: 17.99, image: 'assets/images/accessories/Emily_Necklace.webp', category: 'Accessories'),
+  Product(id: 'p23', name: 'Eternal Hope Necklace', price: 29.99, image: 'assets/images/accessories/Eternal_Hope_Necklace.webp', category: 'Accessories'),
+  Product(id: 'p24', name: 'Rosalie Necklace', price: 21.99, image: 'assets/images/accessories/Rosalie_Necklace.webp', category: 'Accessories'),
+  Product(id: 'p25', name: 'Solange Earrings', price: 12.99, image: 'assets/images/accessories/Solange_Earrings.webp', category: 'Accessories'),
+  Product(id: 'p26', name: 'Valerie Bracelet', price: 15.99, image: 'assets/images/accessories/Valerie_Bracelet.webp', category: 'Accessories'),
+  // Women (added from assets/images/women)
+  Product(id: 'p27', name: 'Teens Premium Tops Niyara', price: 34.99, image: 'assets/images/women/Teens_Premium_Tops_Niyara.jpg', category: 'Women'),
+  Product(id: 'p28', name: 'Womens Premium Salwar Kameez', price: 59.99, image: 'assets/images/women/Womens_Premium_Salwar_Kameez.jpg', category: 'Women'),
+  Product(id: 'p29', name: 'Womens Premium Shrug Divarime', price: 29.99, image: 'assets/images/women/Womens_Premium_SHrug_Divarime.jpg', category: 'Women'),
+  Product(id: 'p30', name: 'Women Premium Kurti Yaren', price: 39.99, image: 'assets/images/women/Women_Premium_Kurti_Yaren.jpg', category: 'Women'),
+  Product(id: 'p31', name: 'Women Premium Pajama Blackdaisy', price: 24.99, image: 'assets/images/women/Women_Premium_Pajama_Blackdaisy.jpg', category: 'Women'),
+  Product(id: 'p32', name: 'Women Premium Tee Kitty', price: 19.99, image: 'assets/images/women/Women_Premium_Tee_Kitty.jpg', category: 'Women'),
+  Product(id: 'p33', name: 'Women Premium Tops Parisha', price: 34.99, image: 'assets/images/women/Women_Premium_Tops_Parisha.jpg', category: 'Women'),
+  // Beauty (added from assets/images/beauty)
+  Product(id: 'p34', name: 'CocoRoo Total Rejavanation Coffee Scrub', price: 49.99, image: 'assets/images/beauty/CocoRoo_Total_Rejavanation_Coffee_Scrub.webp', category: 'Beauty'),
+  Product(id: 'p35', name: 'Minah Collection', price: 34.99, image: 'assets/images/beauty/Minah_Collection.webp', category: 'Beauty'),
+  Product(id: 'p36', name: 'Natural Sugar Body Scrub', price: 29.99, image: 'assets/images/beauty/Natural_Sugar_Body_Scrub.webp', category: 'Beauty'),
+  Product(id: 'p37', name: 'Perfect Shades Flex Stick Multi Use Contour Stick', price: 19.99, image: 'assets/images/beauty/Perfect_Shades_Flex_Stick_Multi_Use_Contour_Stick.webp', category: 'Beauty'),
+  Product(id: 'p38', name: 'Tinted Lip Gloss', price: 24.99, image: 'assets/images/beauty/Tinted_Lip_Gloss.webp', category: 'Beauty'),
 ];
