@@ -13,18 +13,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final pages = [
     {
-      'title': 'Choose Products',
-      'subtitle': 'Find your favourite fashion pieces and build your own look.',
+      'title': 'Discover Your Style',
+      'subtitle': 'Explore the latest trends and timeless fashion.',
       'image': 'assets/images/onboarding1.png',
     },
     {
-      'title': 'Make Payment',
-      'subtitle': 'Simple and secure checkout for a smooth shopping experience.',
+      'title': 'Quality You Love',
+      'subtitle': 'Premium Quality products, curated for you.',
       'image': 'assets/images/onboarding2.png',
     },
     {
-      'title': 'Get Your Order',
-      'subtitle': 'Track your purchase and receive your order with confidence.',
+      'title': 'Shop with Ease',
+      'subtitle': 'A seamless shopping experience anytime, anywhere.',
       'image': 'assets/images/onboarding3.png',
     },
   ];
